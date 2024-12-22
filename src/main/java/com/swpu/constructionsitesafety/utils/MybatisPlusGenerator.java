@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MybatisPlusGenerator {
 	public static void main(String[] args) {
-		FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/site_safety?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "1234")
+		FastAutoGenerator.create("jdbc:mysql://localhost:3306/site_safety?useSSL=false&serverTimezone=UTC&serverTimezone=CTT", "root", "123456")
 				// 全局配置
 				.globalConfig((scanner, builder) -> builder.author(scanner.apply("请输入作者名称？")))
 				// 包配置

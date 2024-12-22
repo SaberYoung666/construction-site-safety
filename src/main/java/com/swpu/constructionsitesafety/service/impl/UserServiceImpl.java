@@ -4,7 +4,10 @@ import com.swpu.constructionsitesafety.entity.User;
 import com.swpu.constructionsitesafety.mapper.UserMapper;
 import com.swpu.constructionsitesafety.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * <p>
@@ -16,5 +19,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+    @Autowired
+    private UserMapper userMapper;
 
+    @Override
+    public Integer userLogin(User user) {
+        userMapper.findByNameAndPassword(user.getName(),user.getPassword());
+        return null;
+    }
 }

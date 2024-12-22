@@ -30,6 +30,13 @@ public class ResultData<T> implements Serializable {
 		return resultData;
 	}
 
+	public static <T> ResultData<T> success() {
+		ResultData<T> resultData = new ResultData<>();
+		resultData.setStatus(ReturnCode.RC200.getCode());
+		resultData.setMessage(ReturnCode.RC200.getMessage());
+		return resultData;
+	}
+
 	/**
 	 * 返回请求失败的数据
 	 *
