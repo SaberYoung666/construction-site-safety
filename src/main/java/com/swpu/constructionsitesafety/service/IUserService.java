@@ -2,6 +2,8 @@ package com.swpu.constructionsitesafety.service;
 
 import com.swpu.constructionsitesafety.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.swpu.constructionsitesafety.entity.dto.LoginDTO;
+import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-21
  */
 public interface IUserService extends IService<User> {
-    Integer userLogin(User user);
+    LoginVO userLogin(String name , String password);
 }
