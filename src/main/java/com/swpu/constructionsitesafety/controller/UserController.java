@@ -2,6 +2,7 @@ package com.swpu.constructionsitesafety.controller;
 
 import com.swpu.constructionsitesafety.entity.User;
 import com.swpu.constructionsitesafety.entity.dto.LoginDTO;
+import com.swpu.constructionsitesafety.entity.dto.ResetPasswordDTO;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 import com.swpu.constructionsitesafety.handler.GlobalExceptionHandler;
 import com.swpu.constructionsitesafety.mapper.UserMapper;
@@ -10,6 +11,7 @@ import com.swpu.constructionsitesafety.service.impl.UserServiceImpl;
 import com.swpu.constructionsitesafety.utils.ResultData;
 import com.swpu.constructionsitesafety.utils.ReturnCode;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,7 @@ import static com.swpu.constructionsitesafety.utils.ReturnCode.USERNAME_OR_PASSW
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Autowired
     private IUserService userService;
@@ -46,6 +49,17 @@ public class UserController {
             } else {
                 return ResultData.success(loginVO);
             }
+        }
+    }
+
+    @PostMapping("/resetPassword")
+    public ResultData resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO){
+        if (resetPasswordDTO.getNewPassword() == null || "".equals(resetPasswordDTO.getNewPassword())) {
+            return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名为空！");
+        }
+        else {
+            userService.resetPassword(resetPasswordDTO);
+            return ResultData.success();
         }
     }
 

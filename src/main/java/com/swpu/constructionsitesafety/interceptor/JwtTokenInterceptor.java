@@ -36,13 +36,15 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 		try {
 			log.info("jwt校验:{}", token);
 			Claims claims = JwtUtil.parseJWT(token);
-			Integer userId = Integer.valueOf((claims.get("user_id").toString()));
+			log.info(String.valueOf(claims));
+			Integer userId = Integer.valueOf((claims.get("USER_ID").toString()));
 			log.info("当前用户的id:{}", userId);
 			BaseContext.setUserId(userId);
 			// 通过，放行
 			return true;
 		} catch (Exception ex) {
 			// 不通过，响应401状态码
+			log.info("请求不通过");
 			response.setStatus(ReturnCode.RC401.getCode());
 			return false;
 		}

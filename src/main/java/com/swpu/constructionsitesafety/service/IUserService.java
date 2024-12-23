@@ -3,6 +3,7 @@ package com.swpu.constructionsitesafety.service;
 import com.swpu.constructionsitesafety.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.swpu.constructionsitesafety.entity.dto.LoginDTO;
+import com.swpu.constructionsitesafety.entity.dto.ResetPasswordDTO;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 
 /**
@@ -15,4 +16,5 @@ import com.swpu.constructionsitesafety.entity.vo.LoginVO;
  */
 public interface IUserService extends IService<User> {
     LoginVO userLogin(String name , String password);
+    Integer resetPassword(ResetPasswordDTO resetPasswordDTO);
 }
