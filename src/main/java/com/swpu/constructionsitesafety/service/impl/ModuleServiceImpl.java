@@ -34,10 +34,10 @@ public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> impleme
 
     @Override
     public Integer StudyAddViews(Integer moduleId) {
-        boolean result = accessLimiter.isAccessAllowed(BaseContext.getUserId());
+        boolean result = accessLimiter.isAccessAllowed(BaseContext.getUserId(),moduleId);
         int result1 = 0;
         if (result) {
-            accessLimiter.incrementAccess(BaseContext.getUserId());
+            accessLimiter.incrementAccess(BaseContext.getUserId(),moduleId);
             result1 = moduleMapper.addViews(moduleId);
         }
         return result1;
