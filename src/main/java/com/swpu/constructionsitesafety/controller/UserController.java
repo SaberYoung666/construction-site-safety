@@ -33,8 +33,8 @@ import static com.swpu.constructionsitesafety.utils.ReturnCode.USERNAME_OR_PASSW
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
-    @Autowired
-    private IUserService userService;
+	@Autowired
+	private IUserService userService;
 
     @PostMapping("/login")
     public ResultData login(@RequestBody LoginDTO loginDTO) {

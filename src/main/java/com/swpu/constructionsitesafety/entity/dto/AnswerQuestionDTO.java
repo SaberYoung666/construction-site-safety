@@ -5,11 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddViewsDTO {
-
-	/**
-	 * 模块的id
-	 */
-	private Integer id;
-
+public class AnswerQuestionDTO {
+	private String question;
+	private String answer;
 }

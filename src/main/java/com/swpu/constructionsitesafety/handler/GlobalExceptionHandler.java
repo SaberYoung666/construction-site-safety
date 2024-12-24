@@ -20,10 +20,10 @@ public class GlobalExceptionHandler {
 	 * @param <T>
 	 * @return
 	 */
-/*	@ExceptionHandler
-	public <T> ResultData<T> exceptionHandler(Exception ex) {
-		log.error("异常信息：{}", ex.getMessage());
-		return ResultData.fail(ReturnCode.RC500.getCode(), ex.getMessage());
-	}*/
+//	@ExceptionHandler
+//	public <T> ResultData<T> exceptionHandler(Exception ex) {
+//		log.error("异常信息：{}", ex.getMessage());
+//		return ResultData.fail(ReturnCode.RC500.getCode(), ex.getMessage());
+//	}
 
 }

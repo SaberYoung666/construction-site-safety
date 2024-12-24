@@ -1,7 +1,7 @@
 package com.swpu.constructionsitesafety.service;
 
-import com.swpu.constructionsitesafety.entity.Question;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.swpu.constructionsitesafety.entity.Question;
 
 /**
  * <p>
@@ -12,5 +12,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-21
  */
 public interface IQuestionService extends IService<Question> {
+
+	public Boolean createQuestions(Integer moduleId);
+
+	public String answerQuestions(String question, String answer);
 
 }
