@@ -69,14 +69,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         result = userMapper.selectById(id);
         return result;
     }
-	@Override
-	public Integer resetPassword(ResetPasswordDTO resetPasswordDTO) {
-		int id = BaseContext.getUserId();
-		log.info(String.valueOf(id));
-		User updateEntity = new User();
-		updateEntity.setId(id);
-		updateEntity.setPassword(resetPasswordDTO.getNewPassword());
-		// 调用 updateById 方法
-		return userMapper.updateById(updateEntity);
-	}
 }
