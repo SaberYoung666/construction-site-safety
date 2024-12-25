@@ -122,7 +122,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	public String answerQuestions(Integer questionId, String answer) {
 		String url = ZhipuConstant.URL;
 		Question question = getById(questionId);
-		String content = String.format(ZhipuConstant.ANSWER_QUESTIONS, question, answer);
+		String content = String.format(ZhipuConstant.ANSWER_QUESTIONS, question.getContent(), answer);
 
 		// 设置请求头
 		HttpHeaders headers = new HttpHeaders();
