@@ -35,6 +35,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	private ModuleMapper moduleMapper;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private QuestionMapper questionMapper;
 
 	private static List<Question> getQuestions(Integer moduleId, String questions) {
 		String[] parts = questions.split("}\\{");
@@ -164,6 +166,11 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 			log.info("Content not found!");
 			return null;
 		}
+	}
+
+	@Override
+	public List<Question> getPractice(Integer moduleId) {
+		return questionMapper.getPractice();
 	}
 
 
