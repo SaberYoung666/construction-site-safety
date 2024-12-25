@@ -17,4 +17,6 @@ import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 public interface IUserService extends IService<User> {
     LoginVO userLogin(String name , String password);
     Integer resetPassword(ResetPasswordDTO resetPasswordDTO);
+
+    User getInfo();
 }

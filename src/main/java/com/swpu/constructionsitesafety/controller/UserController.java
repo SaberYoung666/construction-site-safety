@@ -62,5 +62,11 @@ public class UserController {
             return ResultData.success();
         }
     }
+    @GetMapping("/getInfo")
+    public ResultData<User> getInfo(){
+        User user = new User();
+        user = userService.getInfo();
+        return ResultData.success(user);
+    }
 
 }

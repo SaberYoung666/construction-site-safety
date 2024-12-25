@@ -61,4 +61,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         int result = userMapper.updateById(updateEntity); // 调用 updateById 方法
         return result;
     }
+
+    @Override
+    public User getInfo() {
+        int id = BaseContext.getUserId();
+        User result = new User();
+        result = userMapper.selectById(id);
+        return result;
+    }
 }
