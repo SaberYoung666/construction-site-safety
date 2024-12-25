@@ -35,6 +35,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	private ModuleMapper moduleMapper;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private QuestionMapper questionMapper;
 
 	private static List<Question> getQuestions(Integer moduleId, String questions) {
 		String[] parts = questions.split("}\\{");
@@ -117,9 +119,10 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	}
 
 	@Override
-	public String answerQuestions(String question, String answer) {
+	public String answerQuestions(Integer questionId, String answer) {
 		String url = ZhipuConstant.URL;
-		String content = String.format(ZhipuConstant.ANSWER_QUESTIONS, question, answer);
+		Question question = getById(questionId);
+		String content = String.format(ZhipuConstant.ANSWER_QUESTIONS, question.getContent(), answer);
 
 		// 设置请求头
 		HttpHeaders headers = new HttpHeaders();
@@ -164,6 +167,11 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 			log.info("Content not found!");
 			return null;
 		}
+	}
+
+	@Override
+	public List<Question> getPractice(Integer moduleId) {
+		return questionMapper.getPractice();
 	}
 
 
