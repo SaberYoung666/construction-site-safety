@@ -35,11 +35,6 @@ public class User implements Serializable {
 	private String password;
 
 	/**
-	 * 学习进度
-	 */
-	private Double progress;
-
-	/**
 	 * 用户权限(0为工人，1为管理员)
 	 */
 	private Integer authority;
@@ -53,4 +48,24 @@ public class User implements Serializable {
 	 * 年龄
 	 */
 	private Integer age;
+
+	/**
+	 * 是否完成模块1的学习(0为未学习，1为已学习)
+	 */
+	private Integer module_1;
+
+	/**
+	 * 是否完成模块2的学习(0为未学习，1为已学习)
+	 */
+	private Integer module_2;
+
+	/**
+	 * 是否完成模块3的学习(0为未学习，1为已学习)
+	 */
+	private Integer module_3;
+
+	/**
+	 * 是否完成模块4的学习(0为未学习，1为已学习)
+	 */
+	private Integer module_4;
 }

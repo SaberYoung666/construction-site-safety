@@ -119,8 +119,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	}
 
 	@Override
-	public String answerQuestions(String question, String answer) {
+	public String answerQuestions(Integer questionId, String answer) {
 		String url = ZhipuConstant.URL;
+		Question question = getById(questionId);
 		String content = String.format(ZhipuConstant.ANSWER_QUESTIONS, question, answer);
 
 		// 设置请求头

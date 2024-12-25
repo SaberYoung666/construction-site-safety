@@ -17,7 +17,7 @@ public interface IQuestionService extends IService<Question> {
 
 	public Boolean createQuestions(Integer moduleId);
 
-	public String answerQuestions(String question, String answer);
+	public String answerQuestions(Integer questionId, String answer);
 
 	public List<Question> getPractice(Integer moduleId);
 

@@ -36,7 +36,7 @@ public class QuestionController {
 	@PostMapping("/answer")
 	public ResultData<AnswerQuestionVO> answerQuestion(@RequestBody AnswerQuestionDTO answerQuestionDTO) {
 		AnswerQuestionVO answerQuestionVO = new AnswerQuestionVO();
-		String result = questionService.answerQuestions(answerQuestionDTO.getQuestion(), answerQuestionDTO.getAnswer());
+		String result = questionService.answerQuestions(answerQuestionDTO.getQuestionId(), answerQuestionDTO.getAnswer());
 		String[] parts = result.split("，", 2);
 		answerQuestionVO.setRightOrNot(parts[0].equals("对"));
 		answerQuestionVO.setAnalyze(parts[1]);
