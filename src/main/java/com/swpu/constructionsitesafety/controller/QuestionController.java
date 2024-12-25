@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>
@@ -40,6 +41,15 @@ public class QuestionController {
 		String[] parts = result.split("，", 2);
 		answerQuestionVO.setRightOrNot(parts[0].equals("对"));
 		answerQuestionVO.setAnalyze(parts[1]);
+//		Random random = new Random();
+//		if (random.nextBoolean()) {
+//			answerQuestionVO.setRightOrNot(true);
+//			answerQuestionVO.setAnalyze("对的对的你是对的");
+//		}
+//		else {
+//			answerQuestionVO.setRightOrNot(false);
+//			answerQuestionVO.setAnalyze("错误的错误的");
+//		}
 		return ResultData.success(answerQuestionVO);
 	}
 

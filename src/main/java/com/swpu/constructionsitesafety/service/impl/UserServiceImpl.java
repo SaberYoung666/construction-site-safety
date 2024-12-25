@@ -1,9 +1,7 @@
 package com.swpu.constructionsitesafety.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.swpu.constructionsitesafety.context.BaseContext;
 import com.swpu.constructionsitesafety.entity.User;
-import com.swpu.constructionsitesafety.entity.dto.ResetPasswordDTO;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 import com.swpu.constructionsitesafety.mapper.UserMapper;
 import com.swpu.constructionsitesafety.service.IUserService;
@@ -53,12 +51,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 
 	@Override
-	public Integer resetPassword(ResetPasswordDTO resetPasswordDTO) {
-		int id = BaseContext.getUserId();
-		log.info(String.valueOf(id));
+	public Integer resetPassword(Integer userId, String newPassword) {
 		User updateEntity = new User();
-		updateEntity.setId(id);
-		updateEntity.setPassword(resetPasswordDTO.getNewPassword());
+		updateEntity.setId(userId);
+		updateEntity.setPassword(newPassword);
 		// 调用 updateById 方法
 		return userMapper.updateById(updateEntity);
 	}
