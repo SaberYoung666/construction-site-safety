@@ -41,10 +41,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 			String token = JwtUtil.createJWT(claim);
 			loginVO.setToken(token);
 			loginVO.setName(result.getName());
-			Integer module1 = result.getModule_1();
-			Integer module2 = result.getModule_2();
-			Integer module3 = result.getModule_3();
-			Integer module4 = result.getModule_4();
+			Integer module1 = result.getModule1();
+			Integer module2 = result.getModule2();
+			Integer module3 = result.getModule3();
+			Integer module4 = result.getModule4();
 			int total = 4;
 			Double progress = (((double) (module1 + module2 + module3 + module4) / total) * 100);
 			loginVO.setProgress(progress);
