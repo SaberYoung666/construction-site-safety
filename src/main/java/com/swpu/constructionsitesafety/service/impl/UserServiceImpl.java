@@ -59,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		User updateEntity = new User();
 		updateEntity.setId(id);
 		updateEntity.setPassword(resetPasswordDTO.getNewPassword());
-		int result = userMapper.updateById(updateEntity); // 调用 updateById 方法
-		return result;
+		// 调用 updateById 方法
+		return userMapper.updateById(updateEntity);
 	}
 }
