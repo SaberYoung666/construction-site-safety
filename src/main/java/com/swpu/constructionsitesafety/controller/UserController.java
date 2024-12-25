@@ -35,9 +35,9 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResultData<LoginVO> login(@RequestBody LoginDTO loginDTO) {
-		if (loginDTO.getName() == null || "".equals(loginDTO.getName())) {
+		if (loginDTO.getName() == null || loginDTO.getName().isEmpty()) {
 			return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名为空！");
-		} else if (loginDTO.getPassword() == null || "".equals(loginDTO.getPassword())) {
+		} else if (loginDTO.getPassword() == null || loginDTO.getPassword().isEmpty()) {
 			return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "密码为空！");
 		} else {
 			LoginVO loginVO = userService.userLogin(loginDTO.getName(), loginDTO.getPassword());
