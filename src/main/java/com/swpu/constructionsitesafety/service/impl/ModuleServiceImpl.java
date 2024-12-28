@@ -1,17 +1,15 @@
 package com.swpu.constructionsitesafety.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.constructionsitesafety.context.BaseContext;
 import com.swpu.constructionsitesafety.entity.Module;
 import com.swpu.constructionsitesafety.mapper.ModuleMapper;
-import com.swpu.constructionsitesafety.mapper.UserMapper;
 import com.swpu.constructionsitesafety.service.IModuleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.constructionsitesafety.utils.AccessLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -23,23 +21,29 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> implements IModuleService {
-    @Autowired
-    private ModuleMapper moduleMapper;
-    private final AccessLimiter accessLimiter = new AccessLimiter();
-    @Override
-    public List<Module> lookViews() {
-        List<Module> modules = moduleMapper.LookModules();
-        return modules;
-    }
+	private final AccessLimiter accessLimiter = new AccessLimiter();
+	@Autowired
+	private ModuleMapper moduleMapper;
 
-    @Override
-    public Integer StudyAddViews(Integer moduleId) {
-        boolean result = accessLimiter.isAccessAllowed(BaseContext.getUserId(),moduleId);
-        int result1 = 0;
-        if (result) {
-            accessLimiter.incrementAccess(BaseContext.getUserId(),moduleId);
-            result1 = moduleMapper.addViews(moduleId);
-        }
-        return result1;
-    }
+	@Override
+	public List<Module> lookViews() {
+		List<Module> modules = moduleMapper.LookModules();
+		return modules;
+	}
+
+	@Override
+	public Integer StudyAddViews(Integer moduleId) {
+		boolean result = accessLimiter.isAccessAllowed(BaseContext.getUserId(), moduleId);
+		int result1 = 0;
+		if (result) {
+			accessLimiter.incrementAccess(BaseContext.getUserId(), moduleId);
+			result1 = moduleMapper.addViews(moduleId);
+		}
+		return result1;
+	}
+
+	@Override
+	public Integer studiedNum(Integer moduleId) {
+		return moduleMapper.studiedNum(moduleId);
+	}
 }

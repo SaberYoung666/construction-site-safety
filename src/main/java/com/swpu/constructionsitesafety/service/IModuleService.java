@@ -17,4 +17,6 @@ public interface IModuleService extends IService<Module> {
     List<Module> lookViews();
 
     Integer StudyAddViews(Integer moduleId);
+
+    Integer studiedNum(Integer moduleId);
 }

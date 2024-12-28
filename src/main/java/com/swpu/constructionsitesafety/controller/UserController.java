@@ -2,10 +2,7 @@ package com.swpu.constructionsitesafety.controller;
 
 import com.swpu.constructionsitesafety.context.BaseContext;
 import com.swpu.constructionsitesafety.entity.User;
-import com.swpu.constructionsitesafety.entity.dto.LoginDTO;
-import com.swpu.constructionsitesafety.entity.dto.UpdatePasswordDTO;
-import com.swpu.constructionsitesafety.entity.dto.UpdatePhoneDTO;
-import com.swpu.constructionsitesafety.entity.dto.UserIdDTO;
+import com.swpu.constructionsitesafety.entity.dto.*;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 import com.swpu.constructionsitesafety.service.IUserService;
 import com.swpu.constructionsitesafety.utils.ResultData;
@@ -88,10 +85,10 @@ public class UserController {
 	}
 
 	@GetMapping("/getAllUsersInfo")
-	public ResultData<List<User>> getAllUsersInfo() {
+	public ResultData<List<User>> getAllUsersInfo(@RequestParam GetAllUsersInfoDTO getAllUsersInfoDTO) {
 		User user = userService.getById(BaseContext.getUserId());
 		if (user.getAuthority() == 1) {
-			List<User> users = userService.list();
+			List<User> users = userService.getAllUsersInfo(getAllUsersInfoDTO.getPage());
 			return ResultData.success(users);
 		}
 		return ResultData.fail(RC403.getCode(), RC403.getMessage());

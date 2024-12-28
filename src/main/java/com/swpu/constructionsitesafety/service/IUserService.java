@@ -1,8 +1,10 @@
 package com.swpu.constructionsitesafety.service;
 
-import com.swpu.constructionsitesafety.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.swpu.constructionsitesafety.entity.User;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,8 +15,11 @@ import com.swpu.constructionsitesafety.entity.vo.LoginVO;
  * @since 2024-12-21
  */
 public interface IUserService extends IService<User> {
-    LoginVO userLogin(String name , String password);
-    Integer resetPassword(Integer userId, String newPassword);
+	LoginVO userLogin(String name, String password);
 
-    User getInfo();
+	Integer resetPassword(Integer userId, String newPassword);
+
+	User getInfo();
+
+	List<User> getAllUsersInfo(Integer pageId);
 }

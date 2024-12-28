@@ -1,9 +1,12 @@
 package com.swpu.constructionsitesafety.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.constructionsitesafety.context.BaseContext;
 import com.swpu.constructionsitesafety.entity.User;
-import com.swpu.constructionsitesafety.entity.dto.ResetPasswordDTO;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
 import com.swpu.constructionsitesafety.mapper.UserMapper;
 import com.swpu.constructionsitesafety.service.IUserService;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,13 +57,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 
 
-    @Override
-    public User getInfo() {
-        int id = BaseContext.getUserId();
-        User result = new User();
-        result = userMapper.selectById(id);
-        return result;
-    }
+	@Override
+	public User getInfo() {
+		int id = BaseContext.getUserId();
+		return userMapper.selectById(id);
+	}
+
+	@Override
+	public List<User> getAllUsersInfo(Integer pageId) {
+		Page<User> page = new Page<>(pageId, 10);
+		return userMapper.findPageUsers(page);
+
+//		Page<User> userPage = new Page<>(1 , 2);
+//		IPage<User> userIPage = userMapper.selectPage(userPage , userLambdaQueryWrapper);
+//		System.out.println("总页数： "+userIPage.getPages());
+//		System.out.println("总记录数： "+userIPage.getTotal());
+//		userIPage.getRecords().forEach(System.out::println);
+	}
+
 	@Override
 	public Integer resetPassword(Integer userId, String newPassword) {
 		User updateEntity = new User();
@@ -68,4 +83,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		// 调用 updateById 方法
 		return userMapper.updateById(updateEntity);
 	}
+
+
 }
