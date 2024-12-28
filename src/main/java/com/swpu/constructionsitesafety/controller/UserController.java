@@ -86,7 +86,6 @@ public class UserController {
 
 	@GetMapping("/getAllUsersInfo")
 	public ResultData<List<User>> getAllUsersInfo(@RequestParam Integer pageId) {
-		log.info("qingqiuchenggong");
 		User user = userService.getById(BaseContext.getUserId());
 		if (user.getAuthority() == 1) {
 			List<User> users = userService.getAllUsersInfo(pageId);

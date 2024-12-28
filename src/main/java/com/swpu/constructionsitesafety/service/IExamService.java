@@ -1,7 +1,10 @@
 package com.swpu.constructionsitesafety.service;
 
-import com.swpu.constructionsitesafety.entity.Exam;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.swpu.constructionsitesafety.entity.Exam;
+import com.swpu.constructionsitesafety.entity.Question;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-21
  */
 public interface IExamService extends IService<Exam> {
-
+	public List<Question> getExam();
 }
