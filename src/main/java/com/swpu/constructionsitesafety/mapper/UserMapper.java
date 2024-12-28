@@ -19,7 +19,4 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
 	@Select("select * from user where name = #{name} and password = #{password} limit 1")
 	User findByNameAndPassword(@Param("name") String name, @Param("password") String password);
-
-	@Select("SELECT * FROM user WHERE authority = 0")
-	List<User> findPageUsers(Page<User> page);
 }

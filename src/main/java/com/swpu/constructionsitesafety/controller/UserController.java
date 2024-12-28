@@ -85,10 +85,11 @@ public class UserController {
 	}
 
 	@GetMapping("/getAllUsersInfo")
-	public ResultData<List<User>> getAllUsersInfo(@RequestParam GetAllUsersInfoDTO getAllUsersInfoDTO) {
+	public ResultData<List<User>> getAllUsersInfo(@RequestParam Integer pageId) {
+		log.info("qingqiuchenggong");
 		User user = userService.getById(BaseContext.getUserId());
 		if (user.getAuthority() == 1) {
-			List<User> users = userService.getAllUsersInfo(getAllUsersInfoDTO.getPage());
+			List<User> users = userService.getAllUsersInfo(pageId);
 			return ResultData.success(users);
 		}
 		return ResultData.fail(RC403.getCode(), RC403.getMessage());

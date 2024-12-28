@@ -1,6 +1,7 @@
 package com.swpu.constructionsitesafety.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -66,13 +67,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	@Override
 	public List<User> getAllUsersInfo(Integer pageId) {
 		Page<User> page = new Page<>(pageId, 10);
-		return userMapper.findPageUsers(page);
-
-//		Page<User> userPage = new Page<>(1 , 2);
-//		IPage<User> userIPage = userMapper.selectPage(userPage , userLambdaQueryWrapper);
-//		System.out.println("总页数： "+userIPage.getPages());
-//		System.out.println("总记录数： "+userIPage.getTotal());
-//		userIPage.getRecords().forEach(System.out::println);
+		QueryWrapper<User> wrapper = new QueryWrapper<>();
+		wrapper.eq("authority", 0);
+		IPage<User> userPage = userMapper.selectPage(page, wrapper);
+		return userPage.getRecords();
 	}
 
 	@Override
