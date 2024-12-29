@@ -13,7 +13,7 @@ public class LoginDTO {
     /**
      * 用户姓名
      */
-    private String name;
+    private String phone;
 
     /**
      * 用户密码

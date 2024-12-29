@@ -35,10 +35,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	private UserMapper userMapper;
 
 	@Override
-	public LoginVO userLogin(String name, String password) {
+	public LoginVO userLogin(String phone, String password) {
 		Map<String, Object> claim = new HashMap<>();
 		LoginVO loginVO = new LoginVO();
-		User result = userMapper.findByNameAndPassword(name, password);
+		User result = userMapper.findByNameAndPassword(phone, password);
 		if (result == null) {
 			loginVO = null;
 		} else {
@@ -81,6 +81,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 
 	@Override
+	public Integer getUserPhone(String phone) {
+		int message = 0;
+		User result = userMapper.getUserPhone(phone);
+		if (result == null) {
+			 message = -1;
+		}
+		return message;
+	}
+
+	@Override
 	public Integer resetPassword(Integer userId, String newPassword) {
 		User updateEntity = new User();
 		updateEntity.setId(userId);
@@ -88,6 +98,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		// 调用 updateById 方法
 		return userMapper.updateById(updateEntity);
 	}
-
 
 }

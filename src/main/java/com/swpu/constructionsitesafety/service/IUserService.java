@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2024-12-21
  */
 public interface IUserService extends IService<User> {
-	LoginVO userLogin(String name, String password);
+	LoginVO userLogin(String phone, String password);
 
 	Integer resetPassword(Integer userId, String newPassword);
 
@@ -25,4 +25,6 @@ public interface IUserService extends IService<User> {
 	IPage<User> getAllUsersInfo(Integer pageId);
 
 	IPage<User> selectUser(String likeName);
+
+	Integer getUserPhone(String phone);
 }

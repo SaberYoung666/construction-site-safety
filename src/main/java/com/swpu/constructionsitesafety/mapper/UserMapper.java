@@ -17,6 +17,8 @@ import java.util.List;
  * @since 2024-12-21
  */
 public interface UserMapper extends BaseMapper<User> {
-	@Select("select * from user where name = #{name} and password = #{password} limit 1")
-	User findByNameAndPassword(@Param("name") String name, @Param("password") String password);
+	@Select("select * from user where phone = #{phone} and password = #{password} limit 1")
+	User findByNameAndPassword(@Param("phone") String phone, @Param("password") String password);
+	@Select("select * from user where phone = #{phone} limit 1")
+	User getUserPhone(@Param("phone") String phone);
 }

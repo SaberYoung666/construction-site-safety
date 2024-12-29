@@ -32,14 +32,14 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResultData<LoginVO> login(@RequestBody LoginDTO loginDTO) {
-		if (loginDTO.getName() == null || loginDTO.getName().isEmpty()) {
-			return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名为空！");
+		if (loginDTO.getPhone() == null || loginDTO.getPhone().isEmpty()) {
+			return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "手机号为空！");
 		} else if (loginDTO.getPassword() == null || loginDTO.getPassword().isEmpty()) {
 			return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "密码为空！");
 		} else {
-			LoginVO loginVO = userService.userLogin(loginDTO.getName(), loginDTO.getPassword());
+			LoginVO loginVO = userService.userLogin(loginDTO.getPhone(), loginDTO.getPassword());
 			if (loginVO == null) {
-				return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名或密码错误！");
+				return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "手机号或密码输入错误！");
 			} else {
 				return ResultData.success(loginVO);
 			}
@@ -61,8 +61,9 @@ public class UserController {
 				return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "年龄为空！");
 			}else if (registerDTO.getPhone() == null || registerDTO.getPhone().isEmpty()) {
 				return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "电话号码为空！");
-			}
-			else {
+			} else if (userService.getUserPhone(registerDTO.getPhone()) == 0) {
+				return ResultData.fail(USERNAME_OR_PASSWORD_ERROR.getCode(), "该用户已经存在！");
+			} else {
 				addUser.setName(registerDTO.getName());
 				addUser.setPassword("123456");
 				addUser.setAge(registerDTO.getAge());
