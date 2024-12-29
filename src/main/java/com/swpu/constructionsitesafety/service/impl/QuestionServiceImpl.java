@@ -39,14 +39,38 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 	private QuestionMapper questionMapper;
 
 	private static List<Question> getQuestions(Integer moduleId, String questions) {
-		String[] parts = questions.split("}\\{");
+//		String[] parts = questions.split("}\\{");
+//
+//		// 创建一个List来存储处理后的字符串
+//		List<String> questionList = new ArrayList<>();
+//
+//		// 移除每个部分的大括号，并将结果添加到列表中
+//		for (String part : parts) {
+//			String cleanedPart = part.replaceAll("[{}]", "");
+//			questionList.add(cleanedPart);
+//		}
+//
+//		if (questionList.size() < 3) {
+//			throw new ZhiPuException("调用智谱api生成问题出错");
+//		}
+//
+//		List<Question> questionEntityList = new ArrayList<>();
+//		for (String question : questionList) {
+//			Question questionEntity = new Question();
+//			questionEntity.setContent(question);
+//			questionEntity.setModuleId(moduleId);
+//			questionEntityList.add(questionEntity);
+//		}
+//		return questionEntityList;
+		String[] parts = questions.split("？");
 
 		// 创建一个List来存储处理后的字符串
 		List<String> questionList = new ArrayList<>();
 
 		// 移除每个部分的大括号，并将结果添加到列表中
 		for (String part : parts) {
-			String cleanedPart = part.replaceAll("[{}]", "");
+			String cleanedPart = part + "？";
+			log.info(cleanedPart);
 			questionList.add(cleanedPart);
 		}
 
@@ -69,6 +93,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		String url = ZhipuConstant.URL;
 		String moduleName = moduleMapper.selectById(moduleId).getName();
 		String content = String.format(ZhipuConstant.SET_QUESTIONS, moduleName);
+		log.info(content);
 
 		// 设置请求头
 		HttpHeaders headers = new HttpHeaders();
@@ -100,8 +125,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		// 发送请求
 		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
 
-		log.info(response.getBody());
-
 		// 正则表达式匹配 content 的内容
 		Pattern pattern = Pattern.compile("\"content\":\"(.*?)\",\"role\":\"assistant\"");
 		Matcher matcher = pattern.matcher(Objects.requireNonNull(response.getBody()));
@@ -109,6 +132,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 		if (matcher.find()) {
 			// 提取匹配的内容
 			String questions = matcher.group(1);
+			log.info(questions);
 			// 使用 "{}" 作为分隔符来分割字符串
 			List<Question> questionEntityList = getQuestions(moduleId, questions);
 			return saveBatch(questionEntityList);
