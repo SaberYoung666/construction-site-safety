@@ -22,4 +22,6 @@ public interface IUserService extends IService<User> {
 	User getInfo();
 
 	List<User> getAllUsersInfo(Integer pageId);
+
+	List<User> selectUser(Integer pageId,String likeName);
 }

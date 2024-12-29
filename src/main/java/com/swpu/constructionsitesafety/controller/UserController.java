@@ -108,4 +108,14 @@ public class UserController {
 		user.setPhone(updatePhoneDTO.getNewPhone());
 		return ResultData.success(userService.updateById(user));
 	}
+
+	@GetMapping("/selectUser")
+	public  ResultData<List<User>> selectUser(@RequestParam Integer pageId,String likeName){
+		User user = userService.getById(BaseContext.getUserId());
+		if (user.getAuthority() == 1) {
+			List<User> users = userService.selectUser(pageId,likeName);
+			return ResultData.success(users);
+		}
+		return ResultData.fail(RC403.getCode(), RC403.getMessage());
+	}
 }
