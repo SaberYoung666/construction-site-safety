@@ -74,11 +74,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 
 	@Override
-	public List<User> selectUser(Integer pageId,String likeName) {
-		Page<User> page = new Page<>(pageId, 10);
+	public List<User> selectUser( String likeName) {
+		Page<User> page = new Page<>();
 		QueryWrapper<User> wrapper = new QueryWrapper<>();
 		wrapper.like("name",likeName);
-		IPage<User> userPage = userMapper.selectPage(page, wrapper);
+		IPage<User> userPage = userMapper.selectPage(page,wrapper);
 		return userPage.getRecords();
 	}
 
