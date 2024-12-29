@@ -64,4 +64,10 @@ public class QuestionController {
 		}
 		return ResultData.success(questionVOList);
 	}
+	@GetMapping("/getAllQuestion")
+	public ResultData<List<Question>> getAll() {
+		List<Question> questionList = new ArrayList<>();
+		questionList = questionService.list();
+		return ResultData.success(questionList);
+	}
 }
