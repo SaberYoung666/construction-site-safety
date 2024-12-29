@@ -37,4 +37,9 @@ public class Record implements Serializable {
      * 分数
      */
     private Double score;
+
+    /**
+     * 考核时间
+     */
+    private String time;
 }

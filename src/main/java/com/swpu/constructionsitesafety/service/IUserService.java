@@ -1,5 +1,6 @@
 package com.swpu.constructionsitesafety.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.swpu.constructionsitesafety.entity.User;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
@@ -21,7 +22,7 @@ public interface IUserService extends IService<User> {
 
 	User getInfo();
 
-	List<User> getAllUsersInfo(Integer pageId);
+	IPage<User> getAllUsersInfo(Integer pageId);
 
-	List<User> selectUser(String likeName);
+	IPage<User> selectUser(String likeName);
 }

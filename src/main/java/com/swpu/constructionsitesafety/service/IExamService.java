@@ -3,6 +3,8 @@ package com.swpu.constructionsitesafety.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.swpu.constructionsitesafety.entity.Exam;
 import com.swpu.constructionsitesafety.entity.Question;
+import com.swpu.constructionsitesafety.entity.Record;
+import com.swpu.constructionsitesafety.entity.dto.AnswerExamDTO;
 
 import java.util.List;
 
@@ -16,4 +18,6 @@ import java.util.List;
  */
 public interface IExamService extends IService<Exam> {
 	public List<Question> getExam();
+
+	public void checkExam(AnswerExamDTO answerExamDTO, Record record);
 }

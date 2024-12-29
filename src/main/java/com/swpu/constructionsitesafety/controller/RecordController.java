@@ -28,14 +28,10 @@ public class RecordController {
 	private IRecordService recordService;
 
 	@GetMapping("/getPoints")
-	public ResultData<List<Double>> getPoints() {
+	public ResultData<List<Record>> getPoints() {
 		QueryWrapper<Record> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("user_id", BaseContext.getUserId());
 		List<Record> records = recordService.list(queryWrapper);
-		List<Double> points = new ArrayList<>();
-		for (Record record : records) {
-			points.add(record.getScore());
-		}
-		return ResultData.success(points);
+		return ResultData.success(records);
 	}
 }

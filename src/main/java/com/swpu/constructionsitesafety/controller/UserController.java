@@ -1,5 +1,6 @@
 package com.swpu.constructionsitesafety.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swpu.constructionsitesafety.context.BaseContext;
 import com.swpu.constructionsitesafety.entity.User;
 import com.swpu.constructionsitesafety.entity.dto.LoginDTO;
@@ -7,13 +8,12 @@ import com.swpu.constructionsitesafety.entity.dto.UpdatePasswordDTO;
 import com.swpu.constructionsitesafety.entity.dto.UpdatePhoneDTO;
 import com.swpu.constructionsitesafety.entity.dto.UserIdDTO;
 import com.swpu.constructionsitesafety.entity.vo.LoginVO;
+import com.swpu.constructionsitesafety.entity.vo.UserPageVO;
 import com.swpu.constructionsitesafety.service.IUserService;
 import com.swpu.constructionsitesafety.utils.ResultData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.swpu.constructionsitesafety.utils.ReturnCode.*;
 
@@ -92,11 +92,14 @@ public class UserController {
 	}
 
 	@GetMapping("/getAllUsersInfo")
-	public ResultData<List<User>> getAllUsersInfo(@RequestParam Integer pageId) {
+	public ResultData<UserPageVO> getAllUsersInfo(@RequestParam Integer pageId) {
 		User user = userService.getById(BaseContext.getUserId());
 		if (user.getAuthority() == 1) {
-			List<User> users = userService.getAllUsersInfo(pageId);
-			return ResultData.success(users);
+			IPage<User> users = userService.getAllUsersInfo(pageId);
+			UserPageVO userPageVO = new UserPageVO();
+			userPageVO.setPages(users.getPages());
+			userPageVO.setUsers(users.getRecords());
+			return ResultData.success(userPageVO);
 		}
 		return ResultData.fail(RC403.getCode(), RC403.getMessage());
 	}
@@ -110,13 +113,15 @@ public class UserController {
 	}
 
 	@GetMapping("/selectUser")
-	public  ResultData<List<User>> selectUser(@RequestParam String likeName){
+	public ResultData<UserPageVO> selectUser(@RequestParam String likeName) {
 		User user = userService.getById(BaseContext.getUserId());
 		if (user.getAuthority() == 1) {
-			List<User> users = userService.selectUser(likeName);
-			return ResultData.success(users);
+			IPage<User> users = userService.selectUser(likeName);
+			UserPageVO userPageVO = new UserPageVO();
+			userPageVO.setPages(users.getPages());
+			userPageVO.setUsers(users.getRecords());
+			return ResultData.success(userPageVO);
 		}
 		return ResultData.fail(RC403.getCode(), RC403.getMessage());
 	}
-
 }
