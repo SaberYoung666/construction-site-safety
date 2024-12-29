@@ -44,10 +44,6 @@ public class ExamController {
 
 	@GetMapping("/getExam")
 	public ResultData<List<QuestionVO>> getExam() {
-		User user = userService.getById(BaseContext.getUserId());
-		if (user.getAuthority() == 0) {
-			return ResultData.fail(RC403.getCode(), RC403.getMessage());
-		}
 		List<Question> exam = examService.getExam();
 		List<QuestionVO> questionVOList = new ArrayList<>();
 		StringBuilder questionId = new StringBuilder();
@@ -70,6 +66,7 @@ public class ExamController {
 		List<AnswerQuestionDTO> answers = answerExamDTO.getAnswers();
 		int amount = answers.size();
 		double points = 0.0;
+
 		for (AnswerQuestionDTO answer : answers) {
 			String result = questionService.answerQuestions(answer.getQuestionId(), answer.getAnswer());
 			String[] parts = result.split("，", 2);
@@ -84,4 +81,5 @@ public class ExamController {
 		recordService.save(record);
 		return ResultData.success(points);
 	}
+
 }
