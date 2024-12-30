@@ -1,5 +1,8 @@
 package com.swpu.constructionsitesafety.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swpu.constructionsitesafety.entity.Record;
 import com.swpu.constructionsitesafety.entity.vo.RecordVO;
 import com.swpu.constructionsitesafety.mapper.RecordMapper;
@@ -28,6 +31,13 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
     public List<RecordVO> getAllRecord() {
         List<RecordVO> result = new ArrayList<>();
         result = recordMapper.getAllRecord();
+        return result;
+    }
+
+    @Override
+    public List<RecordVO> getNameByRecord(String likeName) {
+        List<RecordVO> result = new ArrayList<>();
+        result = recordMapper.getNameByRecord(likeName);
         return result;
     }
 }

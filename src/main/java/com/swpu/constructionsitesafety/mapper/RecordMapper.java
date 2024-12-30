@@ -3,6 +3,7 @@ package com.swpu.constructionsitesafety.mapper;
 import com.swpu.constructionsitesafety.entity.Record;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.swpu.constructionsitesafety.entity.vo.RecordVO;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,4 +19,8 @@ import java.util.List;
 public interface RecordMapper extends BaseMapper<Record> {
     @Select("SELECT name, score, time FROM record JOIN site_safety.user u on u.id = record.user_id;")
     List<RecordVO> getAllRecord();
+
+    @Select("SELECT name, score, time FROM record JOIN site_safety.user u ON u.id = record.user_id WHERE name LIKE CONCAT('%', #{name}, '%')")
+    List<RecordVO> getNameByRecord(@Param("name") String likeName);
+
 }

@@ -11,6 +11,7 @@ import com.swpu.constructionsitesafety.utils.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -47,6 +48,15 @@ public class RecordController {
 		User user = userService.getById(BaseContext.getUserId());
 		if(user.getAuthority() == 1){
 			return ResultData.success(recordService.getAllRecord());
+		}
+		return ResultData.fail(RC403.getCode(), RC403.getMessage());
+	}
+
+	@GetMapping("/getNameByRecord")
+	public ResultData<List<RecordVO>> getNameByRecord(@RequestParam String likeName){
+		User user = userService.getById(BaseContext.getUserId());
+		if(user.getAuthority() == 1){
+			return ResultData.success(recordService.getNameByRecord(likeName));
 		}
 		return ResultData.fail(RC403.getCode(), RC403.getMessage());
 	}
